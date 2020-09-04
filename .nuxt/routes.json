@@ -1,0 +1,20 @@
+[
+  {
+    "name": "assignRoles",
+    "path": "/assignRoles",
+    "component": "H:\\\\Development\\\\MegaUserDashboard\\\\pages\\\\assignRoles.vue",
+    "chunkName": "pages/assignRoles"
+  },
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "H:\\\\Development\\\\MegaUserDashboard\\\\pages\\\\inspire.vue",
+    "chunkName": "pages/inspire"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "H:\\\\Development\\\\MegaUserDashboard\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]

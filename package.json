@@ -1,0 +1,27 @@
+{
+  "name": "MegaUserDashboard",
+  "version": "1.0.0",
+  "description": "My spectacular Nuxt.js project",
+  "author": "Mohamed Nashaat",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "d3": "^6.1.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.27.0",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
+}
