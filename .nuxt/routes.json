@@ -2,19 +2,22 @@
   {
     "name": "assignRoles",
     "path": "/assignRoles",
-    "component": "H:\\\\Development\\\\MegaUserDashboard\\\\pages\\\\assignRoles.vue",
-    "chunkName": "pages/assignRoles"
+    "component": "H:\\\\Development\\\\websocketcharts\\\\pages\\\\assignRoles.vue",
+    "chunkName": "pages/assignRoles",
+    "_name": "_43de28eb"
   },
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "H:\\\\Development\\\\MegaUserDashboard\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire"
+    "component": "H:\\\\Development\\\\websocketcharts\\\\pages\\\\inspire.vue",
+    "chunkName": "pages/inspire",
+    "_name": "_413a6537"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "H:\\\\Development\\\\MegaUserDashboard\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "component": "H:\\\\Development\\\\websocketcharts\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_14606722"
   }
 ]

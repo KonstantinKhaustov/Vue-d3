@@ -3,7 +3,7 @@
     <v-select :items="items" v-model="selectedItem" label="Solo field" solo></v-select>
     <treemap
       v-if="render"
-      :width="600"
+      :width="800"
       :height="600"
       textColor="white"
       rectColor="blue"
