@@ -2,7 +2,7 @@
   <div>
     <v-select :items="items" v-model="selectedItem" label="Solo field" solo></v-select>
     <treemap
-      v-if="render =='treemap'"
+      v-if="render == 'treemap'"
       :width="800"
       :height="600"
       textColor="white"
@@ -10,9 +10,11 @@
       :data="testData"
     ></treemap>
     <bubble
-      v-if="render == 'bubble'"
+      v-else
       :width="800"
       :height="200"
+      textColor="white"
+      rectColor="blue"
       :data="testData"
     ></bubble>
     <!-- <div v-if="forceRender" id="my_dataviz"></div> -->
