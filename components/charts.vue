@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-select :items="items" v-model="selectedItem" label="Solo field" solo></v-select>
+  <div @contextmenu="handleMenu($event)">
+    <v-select v-show="showMenu" :items="items" v-model="selectedItem" label="Solo field" solo></v-select>
     <!-- <treemap
       v-if="render == 'treemap'"
       :width="800"
@@ -12,7 +12,7 @@
     <bubble
       v-if="render"
       :width="800"
-      :height="200"
+      :height="400"
       textColor="white"
       rectColor="blue"
       :data="testData"
@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       render: true,
+      showMenu: true,
       selectedItem: 'Q',
       items: ['Q', 'BBL', 'BBM'],
       testData: {
@@ -48,6 +49,7 @@ export default {
   watch: {
     selectedItem: function(val) {
       this.changeData(val)
+      this.showMenu = !this.showMenu;
     },
     myChartData: function(val) {
       this.changeData(val)
@@ -114,6 +116,11 @@ export default {
       }
 
       this.items = keys
+    },
+    handleMenu: function(e) {
+      //do stuff
+      e.preventDefault();
+      this.showMenu = !this.showMenu;
     }
   },
   mounted() {
