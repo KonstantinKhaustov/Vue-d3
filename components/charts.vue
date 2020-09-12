@@ -1,16 +1,16 @@
 <template>
   <div>
     <v-select :items="items" v-model="selectedItem" label="Solo field" solo></v-select>
-    <treemap
+    <!-- <treemap
       v-if="render == 'treemap'"
       :width="800"
       :height="600"
       textColor="white"
       rectColor="blue"
       :data="testData"
-    ></treemap>
+    ></treemap> -->
     <bubble
-      v-else
+      v-if="render"
       :width="800"
       :height="200"
       textColor="white"
@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      render: 'bubble',
+      render: true,
       selectedItem: 'Q',
       items: ['Q', 'BBL', 'BBM'],
       testData: {
