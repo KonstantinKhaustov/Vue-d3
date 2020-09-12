@@ -3,14 +3,12 @@
 </template>
 <script>
 export default {
-  props: ['data', 'width', 'height', 'textColor', 'rectColor'],
+  props: ['data', 'width', 'height'],
 
   methods: {
     drawTheChart(
       chartWidth = 600,
       chartHeight = 600,
-      textColor = 'white',
-      rectColor = 'blue'
     ) {
       const root = this.pack(this.data);
       // set the dimensions and margins of the graph
@@ -51,16 +49,18 @@ export default {
         .append("text")
         .attr("clip-path", (d, i) => "clip_"+i)
         .selectAll("tspan")
-        .data(d => !isNaN(d.r)?[d.data.name] : ["no_element"])
+        // .data(d => !isNaN(d.r)?[d.data] : ["no_element"])
+        .data(d => !isNaN(d.r)?[d.data.name, d.data.value]:["no_element"])
         .enter()
         .append("tspan")
-        .text(d => d);
+          .attr("x", 0)
+          .attr("y", (d, i, nodes) => `${i - nodes.length / 2 + 0.8}em`)
+          .text(d => d);
       leaf
         .append("title")
         .attr("fill", "red")
         .text(
-          d =>`${!d.data.name ? "":`${d.data.name} /`}
-            ${!d.data.value ? "":`${d.data.value}`}`
+          d =>this.title(d.data)
         );
       /*****************Todo custom tooltip*****************/
       // const tooltip = leaf
@@ -101,10 +101,13 @@ export default {
         .size([this.width - 2, this.height - 2])
         .padding(3)(d3.hierarchy(data).sum(d => d.name?d.name.length:0));
     },
-    radius(data) {
-      const tooltipStr = `${!data.name ? "":`${data.name} /`}
-            ${!data.value ? "":`${data.value}`}`;
-      return tooltipStr.length;
+    title(data) {
+      let str = "";
+      for (let key in data) {
+        if(!key || key == "name" || key == "value") continue;
+          str += `${key} : ${data[key]}\n`
+      }
+      return str;
     }
   },
   computed: {
@@ -115,7 +118,7 @@ export default {
     }
   },
   mounted() {
-    this.drawTheChart(this.width, this.height, this.rectColor, this.textColor)
+    this.drawTheChart(this.width, this.height)
   }
 }
 </script>
