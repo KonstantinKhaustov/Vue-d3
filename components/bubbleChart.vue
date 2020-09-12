@@ -99,7 +99,7 @@ export default {
       return d3
         .pack()
         .size([this.width - 2, this.height - 2])
-        .padding(3)(d3.hierarchy(data).sum(d => d.name?d.name.length:0));
+        .padding(3)(d3.hierarchy(data).sum(d => d.value?d.value:0));
     },
     title(data) {
       let str = "";
