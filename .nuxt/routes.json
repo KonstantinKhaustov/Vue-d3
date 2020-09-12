@@ -2,22 +2,22 @@
   {
     "name": "assignRoles",
     "path": "/assignRoles",
-    "component": "H:\\\\Development\\\\websocketcharts\\\\pages\\\\assignRoles.vue",
+    "component": "E:\\\\projects\\\\Vue-D3\\\\websocketcharts\\\\pages\\\\assignRoles.vue",
     "chunkName": "pages/assignRoles",
-    "_name": "_43de28eb"
+    "_name": "_36b75723"
   },
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "H:\\\\Development\\\\websocketcharts\\\\pages\\\\inspire.vue",
+    "component": "E:\\\\projects\\\\Vue-D3\\\\websocketcharts\\\\pages\\\\inspire.vue",
     "chunkName": "pages/inspire",
-    "_name": "_413a6537"
+    "_name": "_0ed92122"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "H:\\\\Development\\\\websocketcharts\\\\pages\\\\index.vue",
+    "component": "E:\\\\projects\\\\Vue-D3\\\\websocketcharts\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_14606722"
+    "_name": "_d453f6b2"
   }
 ]

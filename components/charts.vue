@@ -1,22 +1,33 @@
 <template>
   <div>
     <v-select :items="items" v-model="selectedItem" label="Solo field" solo></v-select>
-    <treemap
+    <!-- <treemap
       v-if="render"
       :width="800"
       :height="600"
       textColor="white"
       rectColor="blue"
       :data="testData"
-    ></treemap>
+    ></treemap> -->
+    <bubble
+      v-if="render"
+      :width="800"
+      :height="200"
+      textColor="white"
+      rectColor="blue"
+      :data="testData"
+    ></bubble>
     <!-- <div v-if="forceRender" id="my_dataviz"></div> -->
   </div>
 </template>
 <script>
 import treemap from './treemapD3'
+import bubble from './bubbleChart'
+
 export default {
   components: {
-    treemap
+    treemap,
+    bubble
   },
   data() {
     return {
