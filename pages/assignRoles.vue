@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>test</p>
+    <!-- <p>test</p> -->
 <!-- <websockets></websockets> -->
     <charts></charts>
   </div>

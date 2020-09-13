@@ -1,6 +1,18 @@
 <template>
-  <div @contextmenu="handleMenu($event)">
-    <v-select v-show="showMenu" :items="items" v-model="selectedItem" label="Solo field" solo></v-select>
+  <div>
+    <v-container fluid>
+      <v-row>
+        <v-col cols="6">
+           <div class="grey--text mb-2 text-left">Menu 1</div>
+          <v-select :items="firstMenuItems" v-model="selectedItem_1" label="Solo field" solo></v-select>
+        </v-col>
+        <v-col cols="6">
+          <div class="grey--text mb-2 text-left">Menu 2</div>
+          <div v-if="showMenu_2" class="grey--text mb-2 text-left">Loading...</div>
+          <v-select :items="secondMenuItems" v-model="selectedItem_2" label="Solo field" solo></v-select>
+        </v-col>
+      </v-row>
+    </v-container>
     <!-- <treemap
       v-if="render == 'treemap'"
       :width="800"
@@ -32,9 +44,27 @@ export default {
   data() {
     return {
       render: true,
-      showMenu: true,
-      selectedItem: 'Q',
-      items: ['Q', 'BBL', 'BBM'],
+      selectedItem_1: 'BLLB1 | This tracking BBP.',
+      selectedItem_2: 'Q',
+      showMenu_2: false,
+      firstMenuData:   
+          [
+            {
+              "Name": "BLLB1",
+              "Desc": "This is tracking BBP.",
+              "URL": "ws://kundera.ddns.net:9098/ws/svc/run/qry/BLLB1",
+              "Qkeys": [
+                "name1",
+                "BBP",
+                "BBU",
+                "BBM",
+                "BBL",
+                "Q"
+              ]
+            },
+          ],
+      firstMenuItems: ["BLLB1 | This tracking BBP.", "ROCDNFAST | This is to track fast down."],
+      secondMenuItems: ['Q', 'BBL', 'BBM'],
       testData: {
         children: [
           {
@@ -43,13 +73,17 @@ export default {
           }
         ]
       },
-      myChartData: []
+      myChartData: [],
+      wsUrl: "ws://kundera.ddns.net:9098/ws/svc/run/qry/BLLB1"
     }
   },
   watch: {
-    selectedItem: function(val) {
+    selectedItem_1: function(val) {
+      this.handleMenu_1();
+      // this.setupWebSocket();
+    },
+    selectedItem_2: function(val) {
       this.changeData(val)
-      this.showMenu = !this.showMenu;
     },
     myChartData: function(val) {
       this.changeData(val)
@@ -59,9 +93,11 @@ export default {
   methods: {
     changeData: function(val) {
       let data = this.myChartData
-      // console.log(this.selectedItem)
+      selectedItem_1: '',
+      // console.log(this.selectedItem_2)
       data.forEach(obj => {
-        obj.value = obj[this.selectedItem]
+        selectedItem_1: '',
+        obj.value = obj[this.selectedItem_2]
         obj.name = obj.Issue
       })
       this.testData.children = data
@@ -69,6 +105,16 @@ export default {
       // console.log(data)
 
       this.forceRerender()
+    },
+    handleMenu_1: function() {
+      this.firstMenuData.forEach(d=> {
+        const key = `${d.Name} | ${d.Desc}`
+        if (key == this.selectedItem_1) {
+          this.secondMenuItems = d.QKeys
+          this.selectedItem_2 = this.secondMenuItems[0]
+          this.wsUrl = d.URL
+        }
+      })
     },
     forceRerender() {
       // Remove my-component from the DOM
@@ -81,16 +127,17 @@ export default {
     },
     setupWebSocket() {
       console.log('Starting connection to WebSocket Server')
+      this.showMenu_2 = false;
       let connection = new WebSocket(
-        'ws://kundera.ddns.net:9098/ws/svc/run/qry/BLLB1'
+        this.wsUrl
       )
 
       connection.onmessage = event => {
+        this.showMenu_2 = true;
         this.handleData(event.data)
       }
 
       connection.onopen = function(event) {
-        console.log(event)
         console.log('Successfully connected to the echo websocket server...')
       }
     },
@@ -115,15 +162,25 @@ export default {
         if (typeof x[key] === 'number') keys.push(key)
       }
 
-      this.items = keys
+      this.secondMenuItems = keys
     },
     handleMenu: function(e) {
       //do stuff
       e.preventDefault();
-      this.showMenu = !this.showMenu;
+    },
+    fetchMenuData: async function() {
+      const data = await this.$axios.$get('http://kundera.ddns.net:9098/svc/list/shortqry')
+      this.firstMenuItems = [];
+      data.forEach(d => {
+        const key = `${d.Name} | ${d.Desc}`
+        this.firstMenuItems.push(key)
+      });
+      this.firstMenuData = data;
+      this.selectedItem_1 = this.firstMenuItems[0];
     }
   },
-  mounted() {
+  mounted: async function() {
+    await this.fetchMenuData();
     this.setupWebSocket()
   }
 }
