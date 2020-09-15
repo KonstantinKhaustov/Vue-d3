@@ -159,7 +159,6 @@ export default {
         this.showMenu_2 = true
         this.handleData(event.data)
       }
-
       connection.onopen = function(event) {
         console.log('Successfully connected to the echo websocket server...')
       }
