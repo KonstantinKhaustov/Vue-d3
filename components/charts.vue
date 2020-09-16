@@ -140,6 +140,7 @@ export default {
           this.wsUrl = d.URL
         }
       })
+      this.myChartData = []
     },
     forceRerender() {
       // Remove my-component from the DOM
