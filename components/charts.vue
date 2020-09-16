@@ -88,6 +88,7 @@ export default {
       },
       myChartData: [],
       wsUrl: 'ws://kundera.ddns.net:9098/ws/svc/run/qry/BLLB1',
+      wsConnection: '',
       selectMenu: 'Bubble'
     }
   },
@@ -107,15 +108,13 @@ export default {
   methods: {
     changeData: function(val) {
       let data = this.myChartData
-      selectedItem_1: '',
-        // console.log(this.selectedItem_2)
-        data.forEach(obj => {
-          selectedItem_1: '',
-            (obj.value = obj[this.selectedItem_2]
-              ? obj[this.selectedItem_2]
-              : 1)
-          obj.name = obj.Issue
-        })
+      // console.log(this.selectedItem_2)
+      data.forEach(obj => {
+        (obj.value = obj[this.selectedItem_2]
+          ? obj[this.selectedItem_2]
+          : 1)
+        obj.name = obj.Issue
+      })
       if (data.length) this.testData.children = data
       else
         this.testData = {
@@ -154,19 +153,19 @@ export default {
     setupWebSocket() {
       console.log('Starting connection to WebSocket Server')
       this.showMenu_2 = false
-      let connection = new WebSocket(this.wsUrl)
+      if (this.wsConnection) this.wsConnection.close()
+      this.wsConnection = new WebSocket(this.wsUrl)
 
-      connection.onmessage = event => {
+      this.wsConnection.onmessage = event => {
         this.showMenu_2 = true
         this.handleData(event.data)
       }
-      connection.onopen = function(event) {
+      this.wsConnection.onopen = function(event) {
         console.log('Successfully connected to the echo websocket server...')
       }
     },
 
     handleData: function(data) {
-      // console.log(data)
       let x = JSON.parse(data)
       let flag = true
       for (let i = 0; i < this.myChartData.length; i++) {
